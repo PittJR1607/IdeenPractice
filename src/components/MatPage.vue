@@ -20,7 +20,7 @@
 </template>
 <script>
     import MatDialog from './MatDialog.vue';
-    import {doc, getDoc } from "firebase/firestore";
+    import {doc, setDoc } from "firebase/firestore";
     import { db } from '../main'
 
     
