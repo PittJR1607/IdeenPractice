@@ -1,6 +1,7 @@
 <template >
     <v-container>
         <h1 class="homeHeader my-5">MATERIAS INSCRITAS</h1>
+        <v-btn right plain elevation="0" density="comfortable" size="x-small" @click="getDataFromBase">guardar datos</v-btn>
 
         <v-row justify="center" v-for="(materia, index) in materias" :key="index">
             <v-card elevation="4" class="rounded-xl pa-5 my-3" height="auto" width="80%">
@@ -19,11 +20,15 @@
 </template>
 <script>
     import MatDialog from './MatDialog.vue';
+    import {doc, getDoc } from "firebase/firestore";
+    import { db } from '../main'
+
     
     export default {
         name: 'MatPage',
         data() {
             return {
+                matid: null,
                 materias : [
                     {materia: 'Sistemas Eléctricos' , profesor : 'Thor', salon: "121", dias:" Lu Mi Vi", horario:"9:00 - 11:00"  },
                     {materia: 'Sistemas Eléctricomagnéticos' , profesor : 'El Bicho', salon: "221", dias:"Lu Ma ", horario:"11:00 - 13:00" },
@@ -38,6 +43,14 @@
         components:{
             MatDialog
         },
+
+        methods:{
+            async getDataFromBase(){
+                await setDoc(doc(db,'materias', "PM"), {
+                    materia: 'Producción Musical I' , profesor : 'Sonido Pirata', salon: "411", dias:"Vi", horario:"9:00 - 11:00" ,
+                });
+            }
+        }
     }
 </script>
 <style >
